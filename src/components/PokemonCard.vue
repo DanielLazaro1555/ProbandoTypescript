@@ -89,7 +89,8 @@
 import { defineProps } from "vue";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const props = defineProps<{ pokemon: any }>();
+defineProps<{ pokemon: any }>(); // ✅ No asigna a una variable, pero Vue lo usa internamente
+
 
 
 // Función para asignar colores a los tipos de Pokémon

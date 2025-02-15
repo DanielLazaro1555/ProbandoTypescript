@@ -6,9 +6,14 @@
     <!-- Barra de búsqueda con sugerencias -->
     <div class="mt-6 relative w-80 overflow-visible">
 
-      <input v-model="busqueda" @keydown.down.prevent="moverSeleccion($event, 1)"
-        @keydown.up.prevent="moverSeleccion($event, -1)" type="text" placeholder="Busca un Pokémon..."
-        class="border border-gray-300 p-2 rounded-lg w-full text-center focus:outline-none focus:ring-2 focus:ring-blue-400 overflow-hidden" />
+      <input v-model="busqueda" 
+       @input="obtenerSugerencias(busqueda)" 
+       @keydown.down.prevent="moverSeleccion($event, 1)"
+       @keydown.up.prevent="moverSeleccion($event, -1)" 
+       type="text" 
+       placeholder="Busca un Pokémon..."
+       class="border border-gray-300 p-2 rounded-lg w-full text-center focus:outline-none focus:ring-2 focus:ring-blue-400 overflow-hidden" />
+
 
 
 
@@ -43,9 +48,11 @@ const pokemon = ref<any>(null);
 const sugerencias = ref<string[]>([]);
 const indiceSeleccionado = ref(-1);
 
+
 // Obtener sugerencias de Pokémon al escribir
-const obtenerSugerencias = async () => {
-  if (busqueda.value.length < 2) {
+// @ts-ignore
+const obtenerSugerencias = async (texto: string) => {
+  if (texto.length < 2) {
     sugerencias.value = [];
     return;
   }
@@ -56,12 +63,15 @@ const obtenerSugerencias = async () => {
 
     sugerencias.value = data.results
       .map((p: any) => p.name)
-      .filter((nombre: string) => nombre.includes(busqueda.value.toLowerCase()))
+      .filter((nombre: string) => nombre.includes(texto.toLowerCase()))
       .slice(0, 6);
   } catch (error) {
     console.error("Error obteniendo sugerencias:", error);
   }
 };
+
+
+
 
 // Manejar selección con teclas ↑ y ↓
 const moverSeleccion = (event: KeyboardEvent, direccion: number) => {
