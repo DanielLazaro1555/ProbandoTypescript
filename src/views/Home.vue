@@ -6,13 +6,9 @@
     <!-- Barra de búsqueda con sugerencias -->
     <div class="mt-6 relative w-80 overflow-visible">
 
-      <input v-model="busqueda" 
-       @input="obtenerSugerencias(busqueda)" 
-       @keydown.down.prevent="moverSeleccion($event, 1)"
-       @keydown.up.prevent="moverSeleccion($event, -1)" 
-       type="text" 
-       placeholder="Busca un Pokémon..."
-       class="border border-gray-300 p-2 rounded-lg w-full text-center focus:outline-none focus:ring-2 focus:ring-blue-400 overflow-hidden" />
+      <input v-model="busqueda" @input="obtenerSugerencias(busqueda)" @keydown.down.prevent="moverSeleccion($event, 1)"
+        @keydown.up.prevent="moverSeleccion($event, -1)" type="text" placeholder="Busca un Pokémon..."
+        class="border border-gray-300 p-2 rounded-lg w-full text-center focus:outline-none focus:ring-2 focus:ring-blue-400 overflow-hidden" />
 
 
 
@@ -35,6 +31,12 @@
     </button>
 
     <PokemonCard v-if="pokemon" :pokemon="pokemon" class="mt-6 w-full max-w-md" />
+
+    <!-- Footer -->
+    <footer class="mt-10 py-4 w-full text-center bg-gray-200 text-gray-700 text-sm rounded-t-lg shadow-inner">
+      Realizado por <span class="font-semibold text-blue-500">Daniel Huaman</span> © 2025
+    </footer>
+
   </div>
 </template>
 
